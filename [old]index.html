@@ -4,45 +4,45 @@
     <meta charset="UTF-8">
         <title> Rock Paper Scissors </title>
                 <script type="text/javascript">
-                    // All Global logic will go here.
+                // All Global logic will go here.
                     var rps = ['rock', 'paper', 'scissors'];  // This is the array that holds the 3 viable options
 
 
-                    // ADD COMMENTS TO THIS LATER
-                    function game(){
-                        i = 0;
-                    
-                        while (i <= 5){
-                            console.log("========================================= Round Begin");
-                            console.log(wldRules(computerPlay(), playerPlay()));
-                            console.log("========================================= Round End");
-                            i++;
-                            
-                            if (i == 5){
-                                console.log("-----ScoreBoard-----");
-                                console.log(`Player Score: ${player}`);
-                                console.log(`Computer Score: ${aI}`);
-                                console.log(`Tie Score: ${draw}`);
-                                console.log("--------------------");
-                                return "The tournament has ended.";
+                    function game(computerSelection, playerSelection){
+                            i = 0
+                           
+                            while (i <= 5){
+                                console.log("========================================= Round Begin")
+                                console.log(wldRules(computerSelection, playerSelection))
+                                console.log("========================================= Round End")
+                                i++
+                                
+                                if (i == 5){
+                                    console.log("-----ScoreBoard-----")
+                                    console.log(`Player Score: ${player}`)
+                                    console.log(`Computer Score: ${aI}`)
+                                    console.log(`Tie Score: ${draw}`)
+                                    console.log("--------------------")
+                                    return "The tournament has ended."
+                                }
                             }
                         }
-                    }
 
-                    // Enemy AI func will go here
+                // Enemy AI func will go here
                     function computerPlay(){
                         randoNum = Math.floor(Math.random() * rps.length); // Randomizes index number based on length of array
                         computerChoice = rps[randoNum];  // Takes the randomized number and retrieves the string based on the randomized index number
                         return computerChoice;  // Returns the value of the randomized number to the function when called.
                     }
 
-                    // Player func will go here
+
+                // Player func will go here
                     function playerPlay(){
                         var playerChoice = prompt(`What is your choice? Pick between ${rps[0]}, ${rps[1]}, or ${rps[2]}`).toLowerCase(); // Displays the prompt for input text. Also give you the list of chooseables.
 
                         // Player choice value Checker
                         if (playerChoice === rps[0] || playerChoice === rps[1] || playerChoice === rps[2]){                // Returns value given if put in correctly.
-                            return playerChoice;
+                            return playerChoice
                         }
                         else{
                             alert(`Please type one of the correct responses: ${rps[0]}, ${rps[1]}, or ${rps[2]}`);      // Returns an alert stating that the player did not give a correct choice.
@@ -51,39 +51,60 @@
 
                     }
 
-                    // Game Rules Go Here                      
+                // Game Rules Go Here                      
+                    // Player Selection           
+                        var computerSelection = computerPlay();   // Convert the value of the function to a variable
+                        var playerSelection = playerPlay();       // Convert the value of the function to a variable
+                    
+
+
                     //Score Board variables
-                    var player = 0;              // Handles the players scores.
-                    var aI = 0;                  // Handles the aI's scores.
-                    var draw = 0;                // Handles the draw scores.
+                        var player = 0              // Handles the players scores.
+                        var aI = 0                  // Handles the aI's scores.
+                        var draw = 0                // Handles the draw scores.
+
+                    //GameState Variables
+                    /*
+                    function gameState(state){// Main state variable, it does not have a base value so it is able to transmogrify into any of three "states".
+                        var won = "Won";            // Win state, if the player wins it toggles this state into the gameState.
+                        var lost = "Lost";          // Lose state, if the player loses it toggles this state into the gameState. 
+                        var tie = "Tie";          // Draw State, if the player and computer get the same token it toggles this state into the gameState.
+
+                        if (state == lost){
+                            return aI++
+                        }
+                        else if (state == won){
+                            return player++
+                        }
+                        else if (state == tie){
+                            return draw++
+                        }
+                    }              
+                    */
 
                     // SET WIN LOSS DRAW CONDITIONS
                         //Rule Combinator
-                    function wldRules(computerSelection, playerSelection){ //Handles the laws of winning and losing
-                        //This if statement returns the appropriate string depending on the values compared. It then increments based on the comparison given.
-                        if ((computerSelection === rps[1] && playerSelection === rps[0]) || (computerSelection === rps[2] && playerSelection === rps[1]) || (computerSelection === rps[0] && playerSelection === rps[2])){
-                            aI++;
-                            console.log(`The computer got ${computerSelection} and the player got ${playerSelection}`)
-                            return "The Computer wins!";
+                        function wldRules(computerSelection, playerSelection){ //Handles the laws of winning and losing
+                            if ((computerSelection === rps[1] && playerSelection === rps[0]) || (computerSelection === rps[2] && playerSelection === rps[1]) || (computerSelection === rps[0] && playerSelection === rps[2])){
+                                aI++;
+                                return "The Computer wins!";
+                            }
+                            else if ((computerSelection === rps[0] && playerSelection === rps[1]) || (computerSelection === rps[1] && playerSelection === rps[2]) || (computerSelection === rps[2] && playerSelection === rps[0])){
+                                player++;
+                                return "The Player wins!";
+                            }
+                            else if ((computerSelection === rps[0] && playerSelection === rps[0]) || (computerSelection === rps[1] && playerSelection === rps[1]) || (computerSelection === rps[2] && playerSelection === rps[2])){
+                                draw++;
+                                return "The computer and player are in a draw!";
+                            }
+                            else{
+                                return "How did you break my game?"; // Why did you break my game tho.
+                            }
                         }
-                        else if ((computerSelection === rps[0] && playerSelection === rps[1]) || (computerSelection === rps[1] && playerSelection === rps[2]) || (computerSelection === rps[2] && playerSelection === rps[0])){
-                            player++;
-                            console.log(`The computer got ${computerSelection} and the player got ${playerSelection}`)
-                            return "The Player wins!";
-                        }
-                        else if (computerSelection === playerSelection){
-                            draw++;
-                            console.log(`The computer got ${computerSelection} and the player got ${playerSelection}`)
-                            return "The computer and player are in a draw!";
-                        }
-                        else{
-                            return "How did you break my game?"; // Why did you break my game tho.
-                        }
-                    }
 
 
-                    // Game Functionality goes here.     
-                    game();
+                // Game Functionality goes here.     
+                        game(computerSelection, playerSelection)
                 </script>
             <!-- <link rel="stylesheet" href="stylesheet.css" type="text/css"> -->
   </head>

@@ -4,32 +4,77 @@
     <meta charset="UTF-8">
         <title> Rock Paper Scissors </title>
                 <script type="text/javascript">
-                    // This will be where the main function to start the game will go
-                        var rps = ["Rock", "Paper", "Scissors"];  // This is the array that holds the 3 viable options
+                    // All Global logic will go here.
+                    var rps = ['rock', 'paper', 'scissors'];  // This is the array that holds the 3 viable options
+                    var gameState;
 
-                    // Enemy AI func will go here
-                        function computerPlay(){
-                            randoNum = Math.floor(Math.random() * rps.length); // Randomizes index number based on length of array
+                // Enemy AI func will go here
+                    function computerPlay(){
+                        randoNum = Math.floor(Math.random() * rps.length); // Randomizes index number based on length of array
 
-                            computerChoice = rps[randoNum];  // Takes the randomized number and retrieves the string based on the randomized index number
+                        computerChoice = rps[randoNum];  // Takes the randomized number and retrieves the string based on the randomized index number
 
-                            return computerChoice;  // Returns the value of the randomized number to the function when called.
+                        return computerChoice;  // Returns the value of the randomized number to the function when called.
+                    }
+
+
+                // Player func will go here
+                    function playerPlay(){
+                        console.log(`What is your choice? Pick between ${rps[0]}, ${rps[1]}, or ${rps[2]}`); // Displays a log for the purpose of the choice. Also give you the list of chooseables.
+                        var playerChoice = prompt("Enter your choice.").toLowerCase(); // Displays the prompt for input text.
+
+                        if (playerChoice == rps[0] || playerChoice == rps[1] || playerChoice == rps[2]){
+                            return playerChoice
+                        }
+                        else{
+                            alert(`Please type one of the correct responses: ${rps[0]}, ${rps[1]}, or ${rps[2]}`);
+                            return playerPlay();
                         }
 
-                    // Player func will go here
-                        function playerPlay(){
-                            console.log(`What is your choice? Pick between, Rock, Paper, and Scissors. ${rps[0]}, ${rps[1]}, or $ ${rps[2]}`); // Displays a log for the purpose of the choice. Also give you the list of chooseables.
-                            var playerChoice = prompt("Enter your choice."); // Displays the prompt for input text.
+                    }
 
-                            return playerChoice;
+                // Game Rules Go Here                                  
+                    const computerSelection = computerPlay();
+                    const playerSelection = playerPlay();
+
+                    // SETS RULES FOR LOSS
+                        function wldRules(computerSelection, playerSelection){ //Handles the laws of winning and losing
+                                var win = false;    // variable for containing Win
+                                var lose = false;   // variable for containing Lose
+                                var draw = false;   // variable for containing Draw
+                            if ((computerSelection == rps[1] && playerSelection == rps[0]) || (computerSelection == rps[2] && playerSelection == rps[1]) || (computerSelection == rps[0] && playerSelection == rps[2])){
+                                lose = true
+                                gameState = lose;
+                                return ("The AI wins the game.") 
+                            }
+                            else if ((computerSelection == rps[0] && playerSelection == rps[1]) || (computerSelection == rps[1] && playerSelection == rps[2]) || (computerSelection == rps[2] && playerSelection == rps[0])){
+                                win = true
+                                gameState = win;
+                                return ("The player loses's the Game.") 
+                            }
+                            else if ((computerSelection == rps[0] && playerSelection == rps[0]) || (computerSelection == rps[1] && playerSelection == rps[1]) || (computerSelection == rps[2] && playerSelection == rps[2])){
+                                draw = true
+                                gameState = draw;
+                                return ("The player and the AI have gotten into a Draw.")
+                            }  
+                            else{
+                                return "How did you break my game?"
+                            }
                         }
 
-                        console.log(game());
+                        console.log(computerSelection)
+                        console.log(playerSelection)
+                        console.log(wldRules(computerSelection, playerSelection))
 
-                    // Below are the functions to use in order to randomize the values
-                        // console.log(Math.floor(Math.random() * 7))
+                    // SETS RULES FOR WIN
+
+                    // SETS RULES FOR DRAW 
+
+                // Game Functionality goes here.
+
+
                 </script>
-            <link rel="stylesheet" href="stylesheet.css" type="text/css">
+            <!-- <link rel="stylesheet" href="stylesheet.css" type="text/css"> -->
   </head>
   <body>
 

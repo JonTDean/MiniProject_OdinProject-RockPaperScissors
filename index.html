@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
         <title> Rock Paper Scissors </title>
                 <script type="text/javascript">
-                    // All Global logic will go here.
+                // All Global logic will go here.
                     var rps = ['rock', 'paper', 'scissors'];  // This is the array that holds the 3 viable options
                     var gameState;
 
@@ -37,7 +37,7 @@
                     const computerSelection = computerPlay();
                     const playerSelection = playerPlay();
 
-                    // SETS RULES FOR LOSS
+                    // SET WIN LOSS DRAW CONDITIONS
                         function wldRules(computerSelection, playerSelection){ //Handles the laws of winning and losing
                                 var win = false;    // variable for containing Win
                                 var lose = false;   // variable for containing Lose
@@ -45,34 +45,29 @@
                             if ((computerSelection == rps[1] && playerSelection == rps[0]) || (computerSelection == rps[2] && playerSelection == rps[1]) || (computerSelection == rps[0] && playerSelection == rps[2])){
                                 lose = true
                                 gameState = lose;
-                                return ("The AI wins the game.") 
+                                return ("The AI win's the game.");
                             }
                             else if ((computerSelection == rps[0] && playerSelection == rps[1]) || (computerSelection == rps[1] && playerSelection == rps[2]) || (computerSelection == rps[2] && playerSelection == rps[0])){
                                 win = true
                                 gameState = win;
-                                return ("The player loses's the Game.") 
+                                return ("The player win's the Game.");
                             }
                             else if ((computerSelection == rps[0] && playerSelection == rps[0]) || (computerSelection == rps[1] && playerSelection == rps[1]) || (computerSelection == rps[2] && playerSelection == rps[2])){
                                 draw = true
                                 gameState = draw;
-                                return ("The player and the AI have gotten into a Draw.")
+                                return ("The player and the AI have gotten into a Draw.");
                             }  
                             else{
                                 return "How did you break my game?"
                             }
                         }
 
-                        console.log(computerSelection)
-                        console.log(playerSelection)
-                        console.log(wldRules(computerSelection, playerSelection))
+                // Game Functionality goes here.                                         
+                        function gameStart(){
+                            return wldRules(computerSelection, playerSelection)
+                        }
 
-                    // SETS RULES FOR WIN
-
-                    // SETS RULES FOR DRAW 
-
-                // Game Functionality goes here.
-
-
+                        console.log(gameStart())
                 </script>
             <!-- <link rel="stylesheet" href="stylesheet.css" type="text/css"> -->
   </head>
